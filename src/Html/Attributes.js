@@ -1,5 +1,8 @@
 /* @flow */
 
+import {
+    map as map_
+} from '../../native/virtual-dom/facts';
 import type {
     StyleTuple
 } from '../../native/virtual-dom/facts/style';
@@ -29,6 +32,7 @@ import type {
 export const style: <Msg>(styles: Array<StyleTuple>) => Attribute<Msg> = style_;
 export const property: <Msg>(key: string, value: string | bool) => Attribute<Msg> = property_;
 export const attribute: <Msg>(key: string, value: string) => Attribute<Msg> = attribute_;
+export const map: <A, Msg>(fn: (a: A) => Msg, Attribute<A>) => Attribute<Msg> = map_;
 
 /* --- Super Common Attributes --- */
 

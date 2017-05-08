@@ -13,7 +13,7 @@ export interface Event<Msg> {
     }
 }
 
-export type Decoder<Msg> = (value: SyntheticInputEvent) => Msg;
+export type Decoder<Msg> = (event: SyntheticInputEvent) => Msg;
 
 export interface Options {
     stopPropagation: bool;

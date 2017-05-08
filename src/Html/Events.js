@@ -8,6 +8,9 @@ import {
     on as on_,
     defaultOptions
 } from '../../native/virtual-dom/facts/event';
+import {
+    compose2
+} from '../../native/utils/compose';
 
 import type {
     Attribute
@@ -69,10 +72,10 @@ export const onMouseOut = <Msg>(tagger: () => Msg): Attribute<Msg> =>
 /* --- Form Events --- */
 
 export const onInput = <Msg>(tagger: (value: string) => Msg): Attribute<Msg> =>
-    on('input', (event: SyntheticInputEvent) => tagger(targetValue(event)));
+    on('input', compose2(tagger, targetValue));
 
 export const onCheck = <Msg>(tagger: (value: bool) => Msg): Attribute<Msg> =>
-    on('change', (event: SyntheticInputEvent) => tagger(targetChecked(event)));
+    on('change', compose2(tagger, targetChecked));
 
 const onSubmitOptions: Options = {
     stopPropagation: false,
