@@ -10,6 +10,11 @@ import {
     text
 } from './Html';
 import {
+    class_,
+    classList,
+    type
+} from './Html/Attributes';
+import {
     onClick,
     onInput
 } from './Html/Events';
@@ -58,8 +63,14 @@ const reset = (): Reset => ({
 })
 
 export const view = (count: number): Html<Msg> => (
-    div([], [
+    div([
+        class_('container')
+    ], [
         button([
+            classList([
+                [ 'hello', false ],
+                [ 'hello', true ]
+            ]),
             onClick(decrement)
         ], [
             text('-')
@@ -74,6 +85,7 @@ export const view = (count: number): Html<Msg> => (
             text('+')
         ]),
         input([
+            type('text'),
             onInput(change)
         ], []),
         button([
