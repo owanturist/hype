@@ -9,9 +9,13 @@ import type {
 import type {
     Property
 } from './property';
+import type {
+    Attribute
+} from './attribute';
 
 export type Fact<Msg>
     = Event<Msg>
     | Style
     | Property
+    | Attribute
     ;

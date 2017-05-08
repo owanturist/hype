@@ -12,6 +12,9 @@ import {
     boolProperty,
     numberProperty
 } from '../../native/virtual-dom/facts/property';
+import {
+    attribute as attribute_
+} from '../../native/virtual-dom/facts/attribute';
 
 import type {
     Attribute
@@ -24,8 +27,8 @@ import type {
 /* --- Primitives --- */
 
 export const style: <Msg>(styles: Array<StyleTuple>) => Attribute<Msg> = style_;
-
 export const property: <Msg>(key: string, value: string | bool) => Attribute<Msg> = property_;
+export const attribute: <Msg>(key: string, value: string) => Attribute<Msg> = attribute_;
 
 /* --- Super Common Attributes --- */
 
