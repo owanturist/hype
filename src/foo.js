@@ -22,9 +22,20 @@ import {
 type Msg
     = Increment
     | Decrement
-    | Change
+    | Change<string>
     | Reset
+    | SubMsg<Msg>
     ;
+
+interface SubMsg<T> {
+    type: 'SubMsg';
+    payload: T;
+}
+
+const subMsg = <T>(msg: T): SubMsg<T> => ({
+    type: 'SubMsg',
+    payload: msg
+})
 
 interface Increment {
     type: 'Increment';
@@ -42,24 +53,22 @@ const decrement = (): Decrement => ({
     type: 'Decrement'
 });
 
-interface Change {
+interface Change<T> {
     type: 'Change',
-    payload: string
+    payload: T
 }
 
-const change = (text: string): Change => ({
+const change = <T>(text: T): Change<T> => ({
     type: 'Change',
     payload: text
 });
 
 interface Reset {
     type: 'Reset';
-    payload: number;
 }
 
 const reset = (): Reset => ({
-    type: 'Reset',
-    payload: 12
+    type: 'Reset'
 })
 
 export const view = (count: number): Html<Msg> => (
