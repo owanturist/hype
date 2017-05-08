@@ -20,7 +20,7 @@ export interface Tag<Msg> {
     children: Array<Node<Msg>>;
 }
 
-export const tag = <Msg>(tagName: string, facts: Array<Fact<Msg>>, children: Array<Node<Msg>>): Tag<Msg> => ({
+export const tag = (tagName: string) => <Msg>(facts: Array<Fact<Msg>>, children: Array<Node<Msg>>): Tag<Msg> => ({
     type: 'TAG',
     tagName,
     facts,
