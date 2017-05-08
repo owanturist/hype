@@ -7,7 +7,10 @@ import {
     style as style_
 } from '../../native/virtual-dom/facts/style';
 import {
-    property as property_
+    property as property_,
+    stringProperty,
+    boolProperty,
+    numberProperty
 } from '../../native/virtual-dom/facts/property';
 
 import type {
@@ -23,10 +26,6 @@ import type {
 export const style: <Msg>(styles: Array<StyleTuple>) => Attribute<Msg> = style_;
 
 export const property: <Msg>(key: string, value: string | bool) => Attribute<Msg> = property_;
-
-const stringProperty = (key: string) => <Msg>(value: string): Attribute<Msg> => property(key, value);
-const boolProperty = (key: string) => <Msg>(value: bool): Attribute<Msg> => property(key, value);
-const numberProperty = (key: string) => <Msg>(value: number): Attribute<Msg> => property(key, value.toString());
 
 /* --- Super Common Attributes --- */
 
