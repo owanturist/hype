@@ -1,10 +1,8 @@
 /* @flow */
 
-import type {
-    Decoder,
-    Options
-} from '../../native/virtual-dom/facts/event';
 import {
+    type Decoder,
+    type Options,
     on as on_,
     defaultOptions
 } from '../../native/virtual-dom/facts/event';
@@ -12,8 +10,8 @@ import {
     compose2
 } from '../../native/utils/compose';
 
-import type {
-    Attribute
+import {
+    type Attribute
 } from './';
 
 /**
@@ -24,7 +22,7 @@ import type {
 
 export const on = <Msg>(key: string, decoder: Decoder<Msg>): Attribute<Msg> => on_(key, defaultOptions, decoder);
 
-export const onWithOptions: <Msg>(key: string, options: Options, decoder: Decoder<Msg>) => Attribute<Msg> = on_;
+export const onWithOptions: <Msg>(string, Options, Decoder<Msg>) => Attribute<Msg> = on_;
 
 export type {
     Event,
@@ -39,43 +37,43 @@ export {
 
 export const targetValue = (event: SyntheticInputEvent): string => event.target.value;
 
-export const targetChecked = (event: SyntheticInputEvent): bool => event.target.checked;
+export const targetChecked = (event: SyntheticInputEvent): boolean => event.target.checked;
 
 export const keyCode = (event: KeyboardEvent): number => event.keyCode;
 
 /* --- Mouse Events --- */
 
 export const onClick = <Msg>(tagger: () => Msg): Attribute<Msg> =>
-    on('click', tagger);
+    onWithOptions('click', defaultOptions, tagger);
 
 export const onDoubleClick = <Msg>(tagger: () => Msg): Attribute<Msg> =>
-    on('dblclick', tagger);
+    onWithOptions('dblclick', defaultOptions, tagger);
 
 export const onMouseDown = <Msg>(tagger: () => Msg): Attribute<Msg> =>
-    on('mousedown', tagger);
+    onWithOptions('mousedown', defaultOptions, tagger);
 
 export const onMouseUp = <Msg>(tagger: () => Msg): Attribute<Msg> =>
-    on('mouseup', tagger);
+    onWithOptions('mouseup', defaultOptions, tagger);
 
 export const onMouseEnter = <Msg>(tagger: () => Msg): Attribute<Msg> =>
-    on('mouseenter', tagger);
+    onWithOptions('mouseenter', defaultOptions, tagger);
 
 export const onMouseLeave = <Msg>(tagger: () => Msg): Attribute<Msg> =>
-    on('mouseleave', tagger);
+    onWithOptions('mouseleave', defaultOptions, tagger);
 
 export const onMouseOver = <Msg>(tagger: () => Msg): Attribute<Msg> =>
-    on('mouseover', tagger);
+    onWithOptions('mouseover', defaultOptions, tagger);
 
 export const onMouseOut = <Msg>(tagger: () => Msg): Attribute<Msg> =>
-    on('mouseout', tagger);
+    onWithOptions('mouseout', defaultOptions, tagger);
 
 /* --- Form Events --- */
 
-export const onInput = <Msg>(tagger: (value: string) => Msg): Attribute<Msg> =>
-    on('input', compose2(tagger, targetValue));
+export const onInput = <Msg>(tagger: string => Msg): Attribute<Msg> =>
+    onWithOptions('input', defaultOptions, compose2(tagger, targetValue));
 
-export const onCheck = <Msg>(tagger: (value: bool) => Msg): Attribute<Msg> =>
-    on('change', compose2(tagger, targetChecked));
+export const onCheck = <Msg>(tagger: boolean => Msg): Attribute<Msg> =>
+    onWithOptions('change', defaultOptions, compose2(tagger, targetChecked));
 
 const onSubmitOptions: Options = {
     stopPropagation: false,
@@ -88,7 +86,7 @@ export const onSubmit = <Msg>(tagger: () => Msg): Attribute<Msg> =>
 /* --- Focus Events --- */
 
 export const onBlur = <Msg>(tagger: () => Msg): Attribute<Msg> =>
-    on('blur', tagger);
+    onWithOptions('blur', defaultOptions, tagger);
 
 export const onFocus = <Msg>(tagger: () => Msg): Attribute<Msg> =>
-    on('focus', tagger);
+    onWithOptions('focus', defaultOptions, tagger);

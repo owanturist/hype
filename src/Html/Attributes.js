@@ -3,10 +3,8 @@
 import {
     map as map_
 } from '../../native/virtual-dom/facts';
-import type {
-    StyleTuple
-} from '../../native/virtual-dom/facts/style';
 import {
+    type StyleTuple,
     style as style_
 } from '../../native/virtual-dom/facts/style';
 import {
@@ -19,8 +17,8 @@ import {
     attribute as attribute_
 } from '../../native/virtual-dom/facts/attribute';
 
-import type {
-    Attribute
+import {
+    type Attribute
 } from './';
 
 /**
@@ -29,16 +27,16 @@ import type {
 
 /* --- Primitives --- */
 
-export const style: <Msg>(styles: Array<StyleTuple>) => Attribute<Msg> = style_;
-export const property: <Msg>(key: string, value: string | bool) => Attribute<Msg> = property_;
-export const attribute: <Msg>(key: string, value: string) => Attribute<Msg> = attribute_;
-export const map: <A, Msg>(fn: (a: A) => Msg, Attribute<A>) => Attribute<Msg> = map_;
+export const style: <Msg>(Array<StyleTuple>) => Attribute<Msg> = style_;
+export const property: <Msg>(string, string | boolean) => Attribute<Msg> = property_;
+export const attribute: <Msg>(string, string) => Attribute<Msg> = attribute_;
+export const map: <A, Msg>(A => Msg, Attribute<A>) => Attribute<Msg> = map_;
 
 /* --- Super Common Attributes --- */
 
 export const class_ = stringProperty('className');
 
-export const classList = <Msg>(values: Array<[ string, bool ]>): Attribute<Msg> => {
+export const classList = <Msg>(values: Array<[ string, boolean ]>): Attribute<Msg> => {
     const result: Array<string> = [];
 
     for (let [ value, condition ] of values) {
@@ -69,7 +67,7 @@ export const accept = stringProperty('accept');
 export const acceptCharset = stringProperty('acceptCharset');
 export const action = stringProperty('action');
 
-export const autocomplete = <Msg>(value: bool): Attribute<Msg> => property(
+export const autocomplete = <Msg>(value: boolean): Attribute<Msg> => property(
     'autocomplete',
     value ? 'on' : 'off'
 );

@@ -1,7 +1,7 @@
 /* @flow */
 
-import type {
-    Fact
+import {
+    type Fact
 } from './facts';
 
 /**

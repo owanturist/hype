@@ -13,11 +13,11 @@ export interface Event<Msg> {
     }
 }
 
-export type Decoder<Msg> = (event: SyntheticInputEvent) => Msg;
+export type Decoder<Msg> = SyntheticInputEvent => Msg;
 
 export interface Options {
-    stopPropagation: bool;
-    preventDefault: bool;
+    stopPropagation: boolean;
+    preventDefault: boolean;
 }
 
 export const defaultOptions: Options = {

@@ -1,19 +1,17 @@
 /* @flow */
 
-import type {
-    Event
-} from './event';
 import {
+    type Event,
     on
 } from './event';
-import type {
-    Style
+import {
+    type Style
 } from './style';
-import type {
-    Property
+import {
+    type Property
 } from './property';
-import type {
-    Attribute
+import {
+    type Attribute
 } from './attribute';
 
 import {
@@ -27,7 +25,7 @@ export type Fact<Msg>
     | Attribute
     ;
 
-export const map = <A, Msg>(fn: (a: A) => Msg, fact: Fact<A>): Fact<Msg> => {
+export const map = <A, Msg>(fn: A => Msg, fact: Fact<A>): Fact<Msg> => {
     switch (fact.type) {
         case 'EVENT': {
             return on(
