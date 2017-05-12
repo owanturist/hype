@@ -1,4 +1,5 @@
 [options]
+experimental.strict_call_arity=true
 
 [ignore]
 .*/node_modules/*
