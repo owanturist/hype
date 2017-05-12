@@ -9,9 +9,22 @@ import type {
  */
 
 export type Node<Msg>
-    = Tag<Msg>
+    = Map<any, Msg>
+    | Tag<Msg>
     | Text
     ;
+
+export interface Map<A, Msg> {
+    type: 'MAP';
+    tagger: A => Msg;
+    node: Node<A>;
+}
+
+export const map = <A, Msg>(tagger: A => Msg, node: Node<A>): Map<A, Msg> => ({
+    type: 'MAP',
+    tagger,
+    node
+});
 
 export interface Tag<Msg> {
     type: 'TAG';

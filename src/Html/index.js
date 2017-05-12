@@ -1,13 +1,13 @@
 /* @flow */
 
-import type {
-    Node
+import {
+    type Node,
+    tag,
+    map as map_,
+    text as text_
 } from '../../native/virtual-dom/nodes';
 import {
-    tag
-} from '../../native/virtual-dom/nodes';
-import type {
-    Fact
+    type Fact
 } from '../../native/virtual-dom/facts';
 
 /**
@@ -21,9 +21,9 @@ export type Attribute<Msg> = Fact<Msg>;
 export const node = <Msg>(tagName: string, attributes: Array<Attribute<Msg>>, children: Array<Html<Msg>>): Html<Msg> =>
     tag(tagName)(attributes, children);
 
-export {
-    text
-} from '../../native/virtual-dom/nodes';
+export const text: <Msg>(string) => Html<Msg> = text_;
+
+export const map: <A, Msg>(A => Msg, Html<A>) => Html<Msg> = map_;
 
 /**
  * --- TAGS ---

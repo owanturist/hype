@@ -27,7 +27,7 @@ export type Fact<Msg>
     | Attribute
     ;
 
-export const map = <T1, T2>(fn: (a: T1) => T2, fact: Fact<T1>): Fact<T2> => {
+export const map = <A, Msg>(fn: (a: A) => Msg, fact: Fact<A>): Fact<Msg> => {
     switch (fact.type) {
         case 'EVENT': {
             return on(

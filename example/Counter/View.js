@@ -27,12 +27,14 @@ export const view = (model: Model): Html<Msg> =>
     div([], [
         div([], [
             button([
+                class_('button'),
                 onClick(decrement)
             ], [
                 text('-')
             ]),
             text(model.toString()),
             button([
+                class_('button'),
                 onClick(increment)
             ], [
                 text('+')
@@ -40,6 +42,7 @@ export const view = (model: Model): Html<Msg> =>
         ]),
         div([], [
             button([
+                class_('button'),
                 onClick(reset)
             ], [
                 text('Reset')
