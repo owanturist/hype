@@ -5,41 +5,55 @@ import * as Counter from './Counter/Types';
 /* --- MODEL --- */
 
 export interface Model {
+    title: string;
     firstCounter: Counter.Model;
     secondCounter: Counter.Model;
 }
 
 export const initModel = (
+    title: string,
     firstCounter: Counter.Model,
     secondCounter: Counter.Model
     ): Model => ({
-    firstCounter,
-    secondCounter
+        title,
+        firstCounter,
+        secondCounter
 });
 
 /* --- MESSAGES --- */
 
 export type Msg
-    = FirstCounterMsg<Counter.Msg>
-    | SecondCounterMsg<Counter.Msg>
+    = ChangeTitle
+    | FirstCounterMsg
+    | SecondCounterMsg
     ;
 
-export interface FirstCounterMsg<M> {
-    type: 'FirstCounterMsg';
-    payload: M;
+export interface ChangeTitle {
+    type: 'ChangeTitle';
+    payload: string;
 }
 
-export const firstCounterMsg = <M>(msg: M): FirstCounterMsg<M> => ({
+export const changeTitle = (title: string): ChangeTitle => ({
+    type: 'ChangeTitle',
+    payload: title
+})
+
+export interface FirstCounterMsg {
+    type: 'FirstCounterMsg';
+    payload: Counter.Msg;
+}
+
+export const firstCounterMsg = (msg: Counter.Msg): FirstCounterMsg => ({
     type: 'FirstCounterMsg',
     payload: msg
 });
 
-export interface SecondCounterMsg<M> {
+export interface SecondCounterMsg {
     type: 'SecondCounterMsg';
-    payload: M;
+    payload: Counter.Msg;
 }
 
-export const secondCounterMsg = <M>(msg: M): SecondCounterMsg<M> => ({
+export const secondCounterMsg = (msg: Counter.Msg): SecondCounterMsg => ({
     type: 'SecondCounterMsg',
     payload: msg
 })
