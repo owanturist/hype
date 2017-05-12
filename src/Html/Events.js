@@ -1,11 +1,12 @@
 /* @flow */
 
 import {
+    type VEvent,
     type Decoder,
-    type Options,
-    on as on_,
+    type Options as Options_,
+    vEvent,
     defaultOptions
-} from '../../native/virtual-dom/facts/event';
+} from '../../native/v-dom/v-facts/v-event';
 import {
     compose2
 } from '../../native/utils/compose';
@@ -20,18 +21,15 @@ import {
 
 /* --- Custom Event Handlers --- */
 
-export const on = <Msg>(key: string, decoder: Decoder<Msg>): Attribute<Msg> => on_(key, defaultOptions, decoder);
+export const on = <Msg>(key: string, decoder: Decoder<Msg>): Attribute<Msg> => vEvent(key, defaultOptions, decoder);
 
-export const onWithOptions: <Msg>(string, Options, Decoder<Msg>) => Attribute<Msg> = on_;
+export const onWithOptions: <Msg>(string, Options, Decoder<Msg>) => Attribute<Msg> = vEvent;
 
-export type {
-    Event,
-    Options
-} from '../../native/virtual-dom/facts/event';
+export type Options = Options_;
 
 export {
     defaultOptions
-} from '../../native/virtual-dom/facts/event';
+} from '../../native/v-dom/v-facts/v-event';
 
 /* --- Custom Decoders --- */
 

@@ -2,20 +2,20 @@
 
 import {
     map as map_
-} from '../../native/virtual-dom/facts';
+} from '../../native/v-dom/v-facts';
 import {
     type StyleTuple,
     style as style_
-} from '../../native/virtual-dom/facts/style';
+} from '../../native/v-dom/v-facts/v-style';
 import {
     property as property_,
     stringProperty,
     boolProperty,
     numberProperty
-} from '../../native/virtual-dom/facts/property';
+} from '../../native/v-dom/v-facts/v-property';
 import {
     attribute as attribute_
-} from '../../native/virtual-dom/facts/attribute';
+} from '../../native/v-dom/v-facts/v-attribute';
 
 import {
     type Attribute

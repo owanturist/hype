@@ -4,8 +4,8 @@
  * --- EVENT ---
  */
 
-export interface Event<Msg> {
-    type: 'EVENT';
+export interface VEvent<Msg> {
+    type: 'V_EVENT';
     key: string;
     value: {
         decoder: Decoder<Msg>;
@@ -25,8 +25,8 @@ export const defaultOptions: Options = {
     preventDefault: false
 };
 
-export const on = <Msg>(key: string, options: Options, decoder: Decoder<Msg>): Event<Msg> => ({
-    type: 'EVENT',
+export const vEvent = <Msg>(key: string, options: Options, decoder: Decoder<Msg>): VEvent<Msg> => ({
+    type: 'V_EVENT',
     key,
     value: {
         options,
