@@ -2,22 +2,22 @@
 
 import type {
     Html
-} from './Html';
+} from '../src/Html';
 import {
     div,
     button,
     input,
     text
-} from './Html';
+} from '../src/Html';
 import {
     class_,
     classList,
     type
-} from './Html/Attributes';
+} from '../src/Html/Attributes';
 import {
     onClick,
     onInput
-} from './Html/Events';
+} from '../src/Html/Events';
 
 type Msg
     = Increment
