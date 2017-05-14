@@ -7,15 +7,15 @@ import {
     div,
     input,
     text
-} from '../src/Html';
+} from '../../src/Html';
 import {
     class_,
     type,
     placeholder
-} from '../src/Html/Attributes';
+} from '../../src/Html/Attributes';
 import {
     onInput
-} from '../src/Html/Events';
+} from '../../src/Html/Events';
 
 import * as Counter from './Counter/View';
 

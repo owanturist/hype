@@ -5,13 +5,13 @@ import {
     div,
     button,
     text
-} from '../../src/Html';
+} from '../../../src/Html';
 import {
     class_
-} from '../../src/Html/Attributes';
+} from '../../../src/Html/Attributes';
 import {
     onClick
-} from '../../src/Html/Events';
+} from '../../../src/Html/Events';
 
 import {
     type Model,
