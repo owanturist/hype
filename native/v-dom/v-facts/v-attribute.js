@@ -1,7 +1,7 @@
 /* @flow */
 
 /**
- * --- ATTRIBUTE ---
+ * --- VIRTUAL ATTRIBUTE ---
  */
 
 export interface VAttribute {

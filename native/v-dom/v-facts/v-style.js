@@ -1,7 +1,7 @@
 /* @flow */
 
 /**
- * --- STYLE ---
+ * --- VIRTUAL STYLE ---
  */
 
 export interface VStyle {

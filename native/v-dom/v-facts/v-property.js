@@ -1,16 +1,21 @@
 /* @flow */
 
 /**
- * --- PROPERTY ---
+ * --- VIRTUAL PROPERTY ---
  */
 
 export interface VProperty {
     type: 'V_PROPERTY';
     key: string;
-    value: string | boolean;
+    value: Value;
 }
 
-export const property = (key: string, value: string | boolean): VProperty => ({
+export type Value
+    = string
+    | boolean
+    ;
+
+export const property = (key: string, value: Value): VProperty => ({
     type: 'V_PROPERTY',
     key,
     value

@@ -8,6 +8,7 @@ import {
     style as style_
 } from '../../native/v-dom/v-facts/v-style';
 import {
+    type Value,
     property as property_,
     stringProperty,
     boolProperty,
@@ -28,7 +29,7 @@ import {
 /* --- Primitives --- */
 
 export const style: <Msg>(Array<StyleTuple>) => Attribute<Msg> = style_;
-export const property: <Msg>(string, string | boolean) => Attribute<Msg> = property_;
+export const property: <Msg>(string, Value) => Attribute<Msg> = property_;
 export const attribute: <Msg>(string, string) => Attribute<Msg> = attribute_;
 export const map: <A, Msg>(A => Msg, Attribute<A>) => Attribute<Msg> = map_;
 

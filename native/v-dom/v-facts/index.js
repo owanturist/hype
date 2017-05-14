@@ -18,6 +18,10 @@ import {
     compose2
 } from '../../utils/compose';
 
+/**
+ * --- VIRTUAL FACTS ---
+ */
+
 export type VFact<Msg>
     = VEvent<Msg>
     | VStyle
@@ -30,8 +34,8 @@ export const map = <A, Msg>(fn: A => Msg, vFact: VFact<A>): VFact<Msg> => {
         case 'V_EVENT': {
             return vEvent(
                 vFact.key,
-                vFact.value.options,
-                compose2(fn, vFact.value.decoder)
+                vFact.options,
+                compose2(fn, vFact.decoder)
             );
         }
 

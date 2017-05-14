@@ -1,19 +1,17 @@
 /* @flow */
 
 /**
- * --- EVENT ---
+ * --- VIRTUAL EVENT ---
  */
 
 export interface VEvent<Msg> {
     type: 'V_EVENT';
     key: string;
-    value: {
-        decoder: Decoder<Msg>;
-        options: Options;
-    }
+    decoder: Decoder<Msg>;
+    options: Options;
 }
 
-export type Decoder<Msg> = SyntheticInputEvent => Msg;
+export type Decoder<Msg> = Event => Msg;
 
 export interface Options {
     stopPropagation: boolean;
@@ -28,8 +26,6 @@ export const defaultOptions: Options = {
 export const vEvent = <Msg>(key: string, options: Options, decoder: Decoder<Msg>): VEvent<Msg> => ({
     type: 'V_EVENT',
     key,
-    value: {
-        options,
-        decoder
-    }
+    options,
+    decoder
 });

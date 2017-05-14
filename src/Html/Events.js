@@ -33,9 +33,9 @@ export {
 
 /* --- Custom Decoders --- */
 
-export const targetValue = (event: SyntheticInputEvent): string => event.target.value;
+export const targetValue = (event: any): string => event.target.value;
 
-export const targetChecked = (event: SyntheticInputEvent): boolean => event.target.checked;
+export const targetChecked = (event: any): boolean => event.target.checked;
 
 export const keyCode = (event: KeyboardEvent): number => event.keyCode;
 
