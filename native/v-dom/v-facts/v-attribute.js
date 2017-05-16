@@ -15,3 +15,7 @@ export const attribute = (key: string, value: string): VAttribute => ({
     key,
     value
 });
+
+export type VAttributesDict = {
+    [ string ]: ?VAttribute;
+};

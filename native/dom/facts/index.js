@@ -27,9 +27,7 @@ import {
 
 export const apply = <Msg>(element: HypeHTMLElement<Msg>, eventNode: EventNode<Msg>, vFactsDict: VFactsDict<Msg>): void => {
     if (vFactsDict.attributes) {
-        for (let key in vFactsDict.attributes) {
-            applyAttribute(element, vFactsDict.attributes[ key ]);
-        }
+        applyAttribute(element, vFactsDict.attributes);
     }
 
     if (vFactsDict.events) {

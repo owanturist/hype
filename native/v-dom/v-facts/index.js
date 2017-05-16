@@ -11,7 +11,8 @@ import {
     type VProperty
 } from './v-property';
 import {
-    type VAttribute
+    type VAttribute,
+    type VAttributesDict
 } from './v-attribute';
 
 import {
@@ -46,17 +47,21 @@ export const map = <A, Msg>(fn: A => Msg, vFact: VFact<A>): VFact<Msg> => {
 }
 
 export interface VFactsDict<Msg> {
-    events?: {
-        [ string ]: VEvent<Msg>;
-    };
-    styles?: VStyle;
-    properties?: {
-        [ string ]: VProperty
-    };
-    attributes?: {
-        [ string ]: VAttribute
-    }
+    events?: VEventDict<Msg>;
+    styles?: VStyleDict;
+    properties?: VPropertyDict;
+    attributes?: VAttributesDict;
 }
+
+export type VEventDict<Msg> = {
+    [ string ]: VEvent<Msg>;
+};
+
+export type VStyleDict = VStyle;
+
+export type VPropertyDict = {
+    [ string ]: VProperty;
+};
 
 export const organize = <Msg>(vFacts: Array<VFact<Msg>>): VFactsDict<Msg> => {
     const dict: VFactsDict<Msg> = {};
@@ -64,30 +69,21 @@ export const organize = <Msg>(vFacts: Array<VFact<Msg>>): VFactsDict<Msg> => {
     for (let vFact of vFacts) {
         switch (vFact.type) {
             case 'V_ATTRIBUTE': {
-                if (!dict.attributes) {
-                    dict.attributes = {};
-                }
-
+                dict.attributes = dict.attributes || {};
                 dict.attributes[ vFact.key ] = vFact;
 
                 break;
             }
 
             case 'V_EVENT': {
-                if (!dict.events) {
-                    dict.events = {};
-                }
-
+                dict.events = dict.events || {};
                 dict.events[ vFact.key ] = vFact;
 
                 break;
             }
 
             case 'V_PROPERTY': {
-                if (!dict.properties) {
-                    dict.properties = {};
-                }
-
+                dict.properties = dict.properties || {};
                 dict.properties[ vFact.key ] = vFact;
 
                 break;
