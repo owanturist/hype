@@ -1,7 +1,9 @@
 /* @flow */
 
 import {
-    type VFact
+    type VFact,
+    type VFactsDict,
+    organize as organizeFacts
 } from './v-facts';
 
 /**
@@ -33,14 +35,14 @@ export const vMap = <A, Msg>(tagger: A => Msg, html: VHtml<A>): VMap<A, Msg> => 
 export interface VNode<Msg> {
     type: 'V_NODE';
     tagName: string;
-    facts: Array<VFact<Msg>>;
+    facts: VFactsDict<Msg>;
     children: Array<VHtml<Msg>>;
 }
 
 export const vNode = <Msg>(tagName: string, facts: Array<VFact<Msg>>, children: Array<VHtml<Msg>>): VNode<Msg> => ({
     type: 'V_NODE',
     tagName,
-    facts,
+    facts: organizeFacts(facts),
     children
 });
 

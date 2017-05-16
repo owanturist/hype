@@ -1,7 +1,8 @@
 /* @flow */
 
 import {
-    type VFact
+    type VFact,
+    type VFactsDict
 } from '../../v-dom/v-facts';
 import {
     type HypeHTMLElement,
@@ -24,31 +25,26 @@ import {
  * --- FACTS ---
  */
 
-export const apply = <Msg>(element: HypeHTMLElement<Msg>, eventNode: EventNode<Msg>, vFacts: Array<VFact<Msg>>): void => {
-    for (let vFact of vFacts) {
-        switch (vFact.type) {
-            case 'V_ATTRIBUTE': {
-                applyAttribute(element, vFact);
-                break;
-            }
-
-            case 'V_EVENT': {
-                applyEvent(element, eventNode, vFact);
-                break;
-            }
-
-            case 'V_PROPERTY': {
-                applyProperty(element, vFact);
-                break;
-            }
-
-            case 'V_STYLE': {
-                applyStyle(element, vFact);
-                break;
-            }
-
-            default: (vFact: empty)
-                throw 'unknown v-fact';
+export const apply = <Msg>(element: HypeHTMLElement<Msg>, eventNode: EventNode<Msg>, vFactsDict: VFactsDict<Msg>): void => {
+    if (vFactsDict.attributes) {
+        for (let key in vFactsDict.attributes) {
+            applyAttribute(element, vFactsDict.attributes[ key ]);
         }
+    }
+
+    if (vFactsDict.events) {
+        for (let key in vFactsDict.events) {
+            applyEvent(element, eventNode, vFactsDict.events[ key ]);
+        }
+    }
+
+    if (vFactsDict.properties) {
+        for (let key in vFactsDict.properties) {
+            applyProperty(element, vFactsDict.properties[ key ]);
+        }
+    }
+
+    if (vFactsDict.styles) {
+        applyStyle(element, vFactsDict.styles);
     }
 };
