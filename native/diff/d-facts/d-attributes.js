@@ -7,7 +7,7 @@ import {
 const diffRemove = (prev: VAttributesDict): ?VAttributesDict => {
     let diff: ?VAttributesDict;
 
-    for (let key: string in prev) {
+    for (let key in prev) {
         diff = diff || {};
         diff[ key ] = undefined;
     }
@@ -18,20 +18,27 @@ const diffRemove = (prev: VAttributesDict): ?VAttributesDict => {
 const diffUpdate = (prev: VAttributesDict, next: VAttributesDict): ?VAttributesDict => {
     let diff: ?VAttributesDict;
 
-    for (let key: string in prev) {
-        diff = diff || {};
-        diff[ key ] = next[ key ];
+    for (let key in prev) {
+        if (key in next) {
+            if (key === 'value' || prev[ key ] !== next[ key ]) {
+                diff = diff || {};
+                diff[ key ] = next[ key ];
+            }
+
+            delete next[ key ];
+        } else {
+            diff = diff || {};
+            diff[ key ] = undefined;
+        }
     }
 
     return diff;
 };
 
 const diffCreate = (acc: ?VAttributesDict, prev: VAttributesDict, next: VAttributesDict): ?VAttributesDict => {
-    for (let key:string in next) {
-        if (!(key in prev)) {
-            acc = acc || {};
-            acc[ key ] = next[ key ];
-        }
+    for (let key in next) {
+        acc = acc || {};
+        acc[ key ] = next[ key ];
     }
 
     return acc;
