@@ -41,7 +41,7 @@ export interface VNode<Msg> {
 }
 
 export const vNode = <Msg>(tagName: string, facts: Array<VFact<Msg>>, children: Array<VHtml<Msg>>): VNode<Msg> => {
-    let descendantsCount = 0;
+    let descendantsCount = children.length;
 
     for (let child of children) {
         descendantsCount += getDescendantsCount(child);
