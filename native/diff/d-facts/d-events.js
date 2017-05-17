@@ -31,8 +31,6 @@ const diffUpdate = <Msg>(prev: VEventsDict<Msg>, next: VEventsDict<Msg>): ?VEven
                 diff = diff || {};
                 diff[ key ] = next[ key ];
             }
-
-            delete next[ key ];
         } else {
             diff = diff || {};
             diff[ key ] = undefined;
@@ -42,10 +40,12 @@ const diffUpdate = <Msg>(prev: VEventsDict<Msg>, next: VEventsDict<Msg>): ?VEven
     return diff;
 };
 
-const diffCreate = <Msg>(acc: ?VEventsDict<Msg>, next: VEventsDict<Msg>): ?VEventsDict<Msg> => {
+const diffCreate = <Msg>(acc: ?VEventsDict<Msg>, prev: VEventsDict<Msg>, next: VEventsDict<Msg>): ?VEventsDict<Msg> => {
     for (let key in next) {
-        acc = acc || {};
-        acc[ key ] = next[ key ];
+        if (!(key in prev)) {
+            acc = acc || {};
+            acc[ key ] = next[ key ];
+        }
     }
 
     return acc;
@@ -58,6 +58,7 @@ export const diff = <Msg>(prev: VEventsDict<Msg>, next: ?VEventsDict<Msg>): ?VEv
 
     return diffCreate(
         diffUpdate(prev, next),
+        prev,
         next
     );
 };

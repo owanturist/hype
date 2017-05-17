@@ -27,8 +27,6 @@ const diffUpdate = (prev: VPropertiesDict, next: VPropertiesDict): ?VPropertiesD
                 diff = diff || {};
                 diff[ key ] = next[ key ];
             }
-
-            delete next[ key ];
         } else {
             diff = diff || {};
             diff[ key ] = resetValue(prev[ key ]);
@@ -38,10 +36,12 @@ const diffUpdate = (prev: VPropertiesDict, next: VPropertiesDict): ?VPropertiesD
     return diff;
 };
 
-const diffCreate = (acc: ?VPropertiesDict, next: VPropertiesDict): ?VPropertiesDict => {
+const diffCreate = (acc: ?VPropertiesDict, prev: VPropertiesDict, next: VPropertiesDict): ?VPropertiesDict => {
     for (let key in next) {
-        acc = acc || {};
-        acc[ key ] = next[ key ];
+        if (!(key in prev)) {
+            acc = acc || {};
+            acc[ key ] = next[ key ];
+        }
     }
 
     return acc;
@@ -54,6 +54,7 @@ export const diff = (prev: VPropertiesDict, next: ?VPropertiesDict): ?VPropertie
 
     return diffCreate(
         diffUpdate(prev, next),
+        prev,
         next
     );
 };

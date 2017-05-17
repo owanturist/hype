@@ -24,8 +24,6 @@ const diffUpdate = (prev: VAttributesDict, next: VAttributesDict): ?VAttributesD
                 diff = diff || {};
                 diff[ key ] = next[ key ];
             }
-
-            delete next[ key ];
         } else {
             diff = diff || {};
             diff[ key ] = undefined;
@@ -35,10 +33,12 @@ const diffUpdate = (prev: VAttributesDict, next: VAttributesDict): ?VAttributesD
     return diff;
 };
 
-const diffCreate = (acc: ?VAttributesDict, next: VAttributesDict): ?VAttributesDict => {
+const diffCreate = (acc: ?VAttributesDict, prev: VAttributesDict, next: VAttributesDict): ?VAttributesDict => {
     for (let key in next) {
-        acc = acc || {};
-        acc[ key ] = next[ key ];
+        if (!(key in prev)) {
+            acc = acc || {};
+            acc[ key ] = next[ key ];
+        }
     }
 
     return acc;
@@ -51,6 +51,7 @@ export const diff = (prev: VAttributesDict, next: ?VAttributesDict): ?VAttribute
 
     return diffCreate(
         diffUpdate(prev, next),
+        prev,
         next
     );
 };

@@ -23,7 +23,6 @@ const diffUpdate = (prev: VStylesDict, next: VStylesDict): ?VStylesDict => {
 
         if (property in next) {
             diff[ property ] = next[ property ];
-            delete next[ property ];
         } else {
             diff[ property ] = '';
         }
@@ -32,10 +31,12 @@ const diffUpdate = (prev: VStylesDict, next: VStylesDict): ?VStylesDict => {
     return diff;
 };
 
-const diffCreate = (acc: ?VStylesDict, next: VStylesDict): ?VStylesDict => {
+const diffCreate = (acc: ?VStylesDict, prev: VStylesDict, next: VStylesDict): ?VStylesDict => {
     for (let property in next) {
-        acc = acc || {};
-        acc[ property ] = next[ property ];
+        if (!(property in prev)) {
+            acc = acc || {};
+            acc[ property ] = next[ property ];
+        }
     }
 
     return acc;
@@ -48,6 +49,7 @@ export const diff = (prev: VStylesDict, next: ?VStylesDict): ?VStylesDict => {
 
     return diffCreate(
         diffUpdate(prev, next),
+        prev,
         next
     );
 };
