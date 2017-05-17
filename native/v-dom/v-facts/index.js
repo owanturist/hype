@@ -7,7 +7,7 @@ import {
 } from './v-event';
 import {
     type VStyle,
-    type VStylesList
+    type VStylesDict
 } from './v-style';
 import {
     type VProperty,
@@ -51,7 +51,7 @@ export const map = <A, Msg>(fn: A => Msg, vFact: VFact<A>): VFact<Msg> => {
 
 export interface VFactsDict<Msg> {
     events?: VEventsDict<Msg>;
-    styles?: VStylesList;
+    styles?: VStylesDict;
     properties?: VPropertiesDict;
     attributes?: VAttributesDict;
 }
@@ -83,7 +83,11 @@ export const organize = <Msg>(vFacts: Array<VFact<Msg>>): VFactsDict<Msg> => {
             }
 
             case 'V_STYLE': {
-                dict.styles = vFact.value;
+                dict.styles = {};
+
+                for (let [ property, value ] of vFact.value) {
+                    dict.styles[ property ] = value;
+                }
 
                 break;
             }

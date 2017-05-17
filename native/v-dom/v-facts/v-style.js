@@ -5,19 +5,21 @@
  */
 
 export interface VStyle {
-    type: 'V_STYLE',
-    value: Value
+    type: 'V_STYLE';
+    value: Array<StyleTuple>;
 }
 
 export type Value
-    = Array<StyleTuple>
+    = string
     ;
 
-export type StyleTuple = [ string, string ];
+export type StyleTuple = [ string, Value ];
 
-export const style = (value: Value): VStyle => ({
+export const style = (value: Array<StyleTuple>): VStyle => ({
     type: 'V_STYLE',
     value
 });
 
-export type VStylesList = Value;
+export type VStylesDict = {
+    [ property: string ]: ?Value;
+};
