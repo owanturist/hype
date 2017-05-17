@@ -1,10 +1,7 @@
 /* @flow */
 
 import {
-    type VFactsDict,
-    type VEventDict,
-    type VStyleDict,
-    type VPropertyDict
+    type VFactsDict
 } from '../../v-dom/v-facts';
 
 

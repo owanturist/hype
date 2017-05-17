@@ -6,7 +6,7 @@
 
 import {
     type VEvent,
-    type VEventDict,
+    type VEventsDict,
     type Value,
     type Options
 } from '../../v-dom/v-facts/v-event';
@@ -17,12 +17,12 @@ import {
     type EventNode
 } from '..';
 
-export const apply = <Msg>(element: HypeHTMLElement<Msg>, eventNode: EventNode<Msg>, vEventDict: VEventDict<Msg>): void => {
+export const apply = <Msg>(element: HypeHTMLElement<Msg>, eventNode: EventNode<Msg>, VEventsDict: VEventsDict<Msg>): void => {
     const allHandlers: HypeHandlers<Msg> = element.hypeHandlers || {};
 
-    for (let key in vEventDict) {
+    for (let key in VEventsDict) {
         const prevHandler: ?HypeHandler<Msg> = allHandlers[ key ];
-        const value: ?Value<Msg> = vEventDict[ key ];
+        const value: ?Value<Msg> = VEventsDict[ key ];
 
         if (prevHandler) {
             if (value) {

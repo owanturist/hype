@@ -20,4 +20,4 @@ export const style = (value: Value): VStyle => ({
     value
 });
 
-export type VStyleList = Value;
+export type VStylesList = Value;

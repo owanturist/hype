@@ -2,16 +2,16 @@
 
 import {
     type VEvent,
-    type VEventDict,
+    type VEventsDict,
     vEvent
 } from './v-event';
 import {
     type VStyle,
-    type VStyleList
+    type VStylesList
 } from './v-style';
 import {
     type VProperty,
-    type VPropertyDict
+    type VPropertiesDict
 } from './v-property';
 import {
     type VAttribute,
@@ -50,9 +50,9 @@ export const map = <A, Msg>(fn: A => Msg, vFact: VFact<A>): VFact<Msg> => {
 }
 
 export interface VFactsDict<Msg> {
-    events?: VEventDict<Msg>;
-    styles?: VStyleList;
-    properties?: VPropertyDict;
+    events?: VEventsDict<Msg>;
+    styles?: VStylesList;
+    properties?: VPropertiesDict;
     attributes?: VAttributesDict;
 }
 

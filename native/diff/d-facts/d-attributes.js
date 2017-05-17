@@ -4,10 +4,10 @@ import {
     type VAttributesDict
 } from '../../v-dom/v-facts/v-attribute';
 
-const diffRemoveAttributes = (prev: VAttributesDict): ?VAttributesDict => {
+const diffRemove = (prev: VAttributesDict): ?VAttributesDict => {
     let diff: ?VAttributesDict;
 
-    for (let key in prev) {
+    for (let key: string in prev) {
         diff = diff || {};
         diff[ key ] = undefined;
     }
@@ -15,19 +15,19 @@ const diffRemoveAttributes = (prev: VAttributesDict): ?VAttributesDict => {
     return diff;
 };
 
-const diffUpdateAttributes = (prev: VAttributesDict, next: VAttributesDict): ?VAttributesDict => {
+const diffUpdate = (prev: VAttributesDict, next: VAttributesDict): ?VAttributesDict => {
     let diff: ?VAttributesDict;
 
-    for (let key in prev) {
+    for (let key: string in prev) {
         diff = diff || {};
-        diff[ key ] = (key in next) ? next[ key ] : undefined;
+        diff[ key ] = next[ key ];
     }
 
     return diff;
 };
 
-const diffCreateAttributes = (acc: ?VAttributesDict, prev: VAttributesDict, next: VAttributesDict): ?VAttributesDict => {
-    for (let key in next) {
+const diffCreate = (acc: ?VAttributesDict, prev: VAttributesDict, next: VAttributesDict): ?VAttributesDict => {
+    for (let key:string in next) {
         if (!(key in prev)) {
             acc = acc || {};
             acc[ key ] = next[ key ];
@@ -35,15 +35,15 @@ const diffCreateAttributes = (acc: ?VAttributesDict, prev: VAttributesDict, next
     }
 
     return acc;
-}
+};
 
-const diffAttributes = (prev: VAttributesDict, next: ?VAttributesDict): ?VAttributesDict => {
+export const diff = (prev: VAttributesDict, next: ?VAttributesDict): ?VAttributesDict => {
     if (!next) {
-        return diffRemoveAttributes(prev);
+        return diffRemove(prev);
     }
 
-    return diffCreateAttributes(
-        diffUpdateAttributes(prev, next),
+    return diffCreate(
+        diffUpdate(prev, next),
         prev,
         next
     );
