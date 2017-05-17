@@ -17,12 +17,12 @@ import {
     type EventNode
 } from '..';
 
-export const apply = <Msg>(element: HypeHTMLElement<Msg>, eventNode: EventNode<Msg>, VEventsDict: VEventsDict<Msg>): void => {
+export const apply = <Msg>(element: HypeHTMLElement<Msg>, eventNode: EventNode<Msg>, dict: VEventsDict<Msg>): void => {
     const allHandlers: HypeHandlers<Msg> = element.hypeHandlers || {};
 
-    for (let key in VEventsDict) {
+    for (let key in dict) {
         const prevHandler: ?HypeHandler<Msg> = allHandlers[ key ];
-        const value: ?Value<Msg> = VEventsDict[ key ];
+        const value: ?Value<Msg> = dict[ key ];
 
         if (prevHandler) {
             if (value) {
