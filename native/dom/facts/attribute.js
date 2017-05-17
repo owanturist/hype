@@ -5,7 +5,6 @@
  */
 
 import {
-    type VAttribute,
     type VAttributesDict
 } from '../../v-dom/v-facts/v-attribute';
 import {
@@ -15,7 +14,7 @@ import {
 export const apply = <Msg>(element: HypeHTMLElement<Msg>, dict: VAttributesDict): void => {
     for (let key in dict) {
         if (dict[ key ]) {
-            element.setAttribute(key, dict[ key ].value);
+            element.setAttribute(key, dict[ key ]);
         } else {
             element.removeAttribute(key);
         }

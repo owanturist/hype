@@ -1,7 +1,7 @@
 /* @flow */
 
 import {
-    type VEvent
+    type Value as VEventValue
 } from '../v-dom/v-facts/v-event';
 
 export class HypeHTMLElement<Msg> extends HTMLElement {
@@ -9,11 +9,11 @@ export class HypeHTMLElement<Msg> extends HTMLElement {
 }
 
 export type HypeHandler<Msg> = EventHandler & {
-    info: VEvent<Msg>
+    info: VEventValue<Msg>
 };
 
 export type HypeHandlers<Msg>  = {
-    [ string ]: HypeHandler<Msg>;
+    [ key: string ]: ?HypeHandler<Msg>;
 };
 
 export interface EventNode<Msg> {

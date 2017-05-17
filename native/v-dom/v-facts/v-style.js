@@ -6,12 +6,18 @@
 
 export interface VStyle {
     type: 'V_STYLE',
-    styles: Array<StyleTuple>
+    value: Value
 }
+
+export type Value
+    = Array<StyleTuple>
+    ;
 
 export type StyleTuple = [ string, string ];
 
-export const style = (styles: Array<StyleTuple>): VStyle => ({
+export const style = (value: Value): VStyle => ({
     type: 'V_STYLE',
-    styles
+    value
 });
+
+export type VStyleList = Value;

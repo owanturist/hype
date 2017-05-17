@@ -6,6 +6,8 @@
 
 import {
     type VEvent,
+    type VEventDict,
+    type Value,
     type Options
 } from '../../v-dom/v-facts/v-event';
 import {
@@ -15,22 +17,30 @@ import {
     type EventNode
 } from '..';
 
-export const apply = <Msg>(element: HypeHTMLElement<Msg>, eventNode: EventNode<Msg>, vEvent: VEvent<Msg>): void => {
+export const apply = <Msg>(element: HypeHTMLElement<Msg>, eventNode: EventNode<Msg>, vEventDict: VEventDict<Msg>): void => {
     const allHandlers: HypeHandlers<Msg> = element.hypeHandlers || {};
-    const prevHandler = allHandlers[ vEvent.key ];
 
-    if (typeof vEvent === 'undefined') {
-        element.removeEventListener(vEvent.key, prevHandler);
-    } else if (typeof prevHandler === 'undefined') {
-        const handler = makeEventHandler(eventNode, vEvent);
+    for (let key in vEventDict) {
+        const prevHandler: ?HypeHandler<Msg> = allHandlers[ key ];
+        const value: ?Value<Msg> = vEventDict[ key ];
 
-        element.addEventListener(vEvent.key, handler);
-    } else {
-        prevHandler.info = vEvent;
+        if (prevHandler) {
+            if (value) {
+                prevHandler.info = value;
+            } else {
+                element.removeEventListener(key, prevHandler);
+                allHandlers[ key ] = undefined;
+            }
+        } else if (value) {
+            const handler = makeEventHandler(eventNode, value);
+
+            element.addEventListener(key, handler);
+            allHandlers[ key ] = handler;
+        }
     }
 };
 
-const makeEventHandler = <Msg>(eventNode: EventNode<Msg>, vEvent: VEvent<Msg>): HypeHandler<Msg> => {
+const makeEventHandler = <Msg>(eventNode: EventNode<Msg>, value: Value<Msg>): HypeHandler<Msg> => {
     const eventHandler = (event: Event):void => {
         const { decoder, options } = eventHandler.info;
         let msg: Msg = decoder(event);
@@ -52,7 +62,7 @@ const makeEventHandler = <Msg>(eventNode: EventNode<Msg>, vEvent: VEvent<Msg>): 
         }
     };
 
-    eventHandler.info = vEvent;
+    eventHandler.info = value;
 
     return eventHandler;
 };

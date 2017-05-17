@@ -2,13 +2,16 @@
 
 import {
     type VEvent,
+    type VEventDict,
     vEvent
 } from './v-event';
 import {
-    type VStyle
+    type VStyle,
+    type VStyleList
 } from './v-style';
 import {
-    type VProperty
+    type VProperty,
+    type VPropertyDict
 } from './v-property';
 import {
     type VAttribute,
@@ -35,8 +38,8 @@ export const map = <A, Msg>(fn: A => Msg, vFact: VFact<A>): VFact<Msg> => {
         case 'V_EVENT': {
             return vEvent(
                 vFact.key,
-                vFact.options,
-                compose2(fn, vFact.decoder)
+                vFact.value.options,
+                compose2(fn, vFact.value.decoder)
             );
         }
 
@@ -48,20 +51,10 @@ export const map = <A, Msg>(fn: A => Msg, vFact: VFact<A>): VFact<Msg> => {
 
 export interface VFactsDict<Msg> {
     events?: VEventDict<Msg>;
-    styles?: VStyleDict;
+    styles?: VStyleList;
     properties?: VPropertyDict;
     attributes?: VAttributesDict;
 }
-
-export type VEventDict<Msg> = {
-    [ string ]: VEvent<Msg>;
-};
-
-export type VStyleDict = VStyle;
-
-export type VPropertyDict = {
-    [ string ]: VProperty;
-};
 
 export const organize = <Msg>(vFacts: Array<VFact<Msg>>): VFactsDict<Msg> => {
     const dict: VFactsDict<Msg> = {};
@@ -70,27 +63,27 @@ export const organize = <Msg>(vFacts: Array<VFact<Msg>>): VFactsDict<Msg> => {
         switch (vFact.type) {
             case 'V_ATTRIBUTE': {
                 dict.attributes = dict.attributes || {};
-                dict.attributes[ vFact.key ] = vFact;
+                dict.attributes[ vFact.key ] = vFact.value;
 
                 break;
             }
 
             case 'V_EVENT': {
                 dict.events = dict.events || {};
-                dict.events[ vFact.key ] = vFact;
+                dict.events[ vFact.key ] = vFact.value;
 
                 break;
             }
 
             case 'V_PROPERTY': {
                 dict.properties = dict.properties || {};
-                dict.properties[ vFact.key ] = vFact;
+                dict.properties[ vFact.key ] = vFact.value;
 
                 break;
             }
 
             case 'V_STYLE': {
-                dict.styles = vFact;
+                dict.styles = vFact.value;
 
                 break;
             }

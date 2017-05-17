@@ -7,6 +7,10 @@
 export interface VEvent<Msg> {
     type: 'V_EVENT';
     key: string;
+    value: Value<Msg>
+}
+
+export interface Value<Msg> {
     decoder: Decoder<Msg>;
     options: Options;
 }
@@ -26,6 +30,12 @@ export const defaultOptions: Options = {
 export const vEvent = <Msg>(key: string, options: Options, decoder: Decoder<Msg>): VEvent<Msg> => ({
     type: 'V_EVENT',
     key,
-    options,
-    decoder
+    value: {
+        options,
+        decoder
+    }
 });
+
+export type VEventDict<Msg> = {
+    [ key: string ]: ?Value<Msg>;
+};

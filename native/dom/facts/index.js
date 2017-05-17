@@ -31,15 +31,11 @@ export const apply = <Msg>(element: HypeHTMLElement<Msg>, eventNode: EventNode<M
     }
 
     if (vFactsDict.events) {
-        for (let key in vFactsDict.events) {
-            applyEvent(element, eventNode, vFactsDict.events[ key ]);
-        }
+        applyEvent(element, eventNode, vFactsDict.events);
     }
 
     if (vFactsDict.properties) {
-        for (let key in vFactsDict.properties) {
-            applyProperty(element, vFactsDict.properties[ key ]);
-        }
+        applyProperty(element, vFactsDict.properties);
     }
 
     if (vFactsDict.styles) {

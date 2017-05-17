@@ -24,3 +24,7 @@ export const property = (key: string, value: Value): VProperty => ({
 export const stringProperty = (key: string) => (value: string): VProperty => property(key, value);
 export const boolProperty = (key: string) => (value: boolean): VProperty => property(key, value);
 export const numberProperty = (key: string) => (value: number): VProperty => property(key, value.toString());
+
+export type VPropertyDict = {
+    [ key: string ]: ?Value;
+};
