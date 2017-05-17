@@ -2,17 +2,17 @@
 
 import {
     type Value,
-    type VEventsDict,
-    type VEventsDiffDict
+    type VEventsDict
 } from '../../v-dom/v-facts/v-event';
 
-const isEqual = <Msg>(left: Value<Msg>, right: Value<Msg>): boolean =>
+const isEqual = <Msg>(left: ?Value<Msg>, right: ?Value<Msg>): boolean =>
+    !!left && !!right &&
     left.decoder === right.decoder &&
     left.options.stopPropagation === right.options.stopPropagation &&
     left.options.preventDefault === right.options.preventDefault;
 
-const diffRemove = <Msg>(prev: VEventsDict<Msg>): ?VEventsDiffDict<Msg> => {
-    let diff: ?VEventsDiffDict<Msg>;
+const diffRemove = <Msg>(prev: VEventsDict<Msg>): ?VEventsDict<Msg> => {
+    let diff: ?VEventsDict<Msg>;
 
     for (let key in prev) {
         diff = diff || {};
@@ -22,8 +22,8 @@ const diffRemove = <Msg>(prev: VEventsDict<Msg>): ?VEventsDiffDict<Msg> => {
     return diff;
 };
 
-const diffUpdate = <Msg>(prev: VEventsDict<Msg>, next: VEventsDict<Msg>): ?VEventsDiffDict<Msg> => {
-    let diff: ?VEventsDiffDict<Msg>;
+const diffUpdate = <Msg>(prev: VEventsDict<Msg>, next: VEventsDict<Msg>): ?VEventsDict<Msg> => {
+    let diff: ?VEventsDict<Msg>;
 
     for (let key in prev) {
         if (key in next) {
@@ -42,7 +42,7 @@ const diffUpdate = <Msg>(prev: VEventsDict<Msg>, next: VEventsDict<Msg>): ?VEven
     return diff;
 };
 
-const diffCreate = <Msg>(acc: ?VEventsDiffDict<Msg>, next: VEventsDict<Msg>): ?VEventsDiffDict<Msg> => {
+const diffCreate = <Msg>(acc: ?VEventsDict<Msg>, next: VEventsDict<Msg>): ?VEventsDict<Msg> => {
     for (let key in next) {
         acc = acc || {};
         acc[ key ] = next[ key ];
@@ -51,7 +51,7 @@ const diffCreate = <Msg>(acc: ?VEventsDiffDict<Msg>, next: VEventsDict<Msg>): ?V
     return acc;
 };
 
-export const diff = <Msg>(prev: VEventsDict<Msg>, next: ?VEventsDict<Msg>): ?VEventsDiffDict<Msg> => {
+export const diff = <Msg>(prev: VEventsDict<Msg>, next: ?VEventsDict<Msg>): ?VEventsDict<Msg> => {
     if (!next) {
         return diffRemove(prev);
     }
