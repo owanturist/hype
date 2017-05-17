@@ -12,7 +12,7 @@ export type HypeHandler<Msg> = EventHandler & {
     info: VEventValue<Msg>
 };
 
-export type HypeHandlers<Msg>  = {
+export type HypeHandlers<Msg> = {
     [ key: string ]: ?HypeHandler<Msg>;
 };
 

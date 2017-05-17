@@ -9,17 +9,17 @@ import {
     type EventNode
 } from '..';
 import {
-    apply as applyAttribute
-} from './attribute';
+    apply as applyAttributes
+} from './attributes';
 import {
-    apply as applyEvent
-} from './event';
+    apply as applyEvents
+} from './events';
 import {
-    apply as applyProperty
-} from './property';
+    apply as applyProperties
+} from './properties';
 import {
-    apply as applyStyle
-} from './style';
+    apply as applyStyles
+} from './styles';
 
 /**
  * --- FACTS ---
@@ -27,18 +27,18 @@ import {
 
 export const apply = <Msg>(element: HypeHTMLElement<Msg>, eventNode: EventNode<Msg>, vFactsDict: VFactsDict<Msg>): void => {
     if (vFactsDict.attributes) {
-        applyAttribute(element, vFactsDict.attributes);
+        applyAttributes(element, vFactsDict.attributes);
     }
 
     if (vFactsDict.events) {
-        applyEvent(element, eventNode, vFactsDict.events);
+        applyEvents(element, eventNode, vFactsDict.events);
     }
 
     if (vFactsDict.properties) {
-        applyProperty(element, vFactsDict.properties);
+        applyProperties(element, vFactsDict.properties);
     }
 
     if (vFactsDict.styles) {
-        applyStyle(element, vFactsDict.styles);
+        applyStyles(element, vFactsDict.styles);
     }
 };
