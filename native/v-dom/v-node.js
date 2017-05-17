@@ -37,14 +37,27 @@ export interface VNode<Msg> {
     tagName: string;
     facts: VFactsDict<Msg>;
     children: Array<VHtml<Msg>>;
+    descendantsCount: number;
 }
 
-export const vNode = <Msg>(tagName: string, facts: Array<VFact<Msg>>, children: Array<VHtml<Msg>>): VNode<Msg> => ({
-    type: 'V_NODE',
-    tagName,
-    facts: organizeFacts(facts),
-    children
-});
+export const vNode = <Msg>(tagName: string, facts: Array<VFact<Msg>>, children: Array<VHtml<Msg>>): VNode<Msg> => {
+    let descendantsCount = 0;
+
+    for (let child of children) {
+        descendantsCount += getDescendantsCount(child);
+    }
+
+    return {
+        type: 'V_NODE',
+        tagName,
+        facts: organizeFacts(facts),
+        children,
+        descendantsCount
+    };
+};
+
+export const getDescendantsCount = <Msg>(vHtml: VHtml<Msg>): number =>
+    vHtml.type === 'V_NODE' ? vHtml.descendantsCount : 0;
 
 /* --- Virtual Text */
 
