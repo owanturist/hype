@@ -37,5 +37,9 @@ export const vEvent = <Msg>(key: string, options: Options, decoder: Decoder<Msg>
 });
 
 export type VEventsDict<Msg> = {
+    [ key: string ]: Value<Msg>;
+};
+
+export type VEventsDiffDict<Msg> = {
     [ key: string ]: ?Value<Msg>;
 };
