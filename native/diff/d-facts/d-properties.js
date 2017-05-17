@@ -8,7 +8,7 @@ import {
 const resetValue = (value: ?Value): ?string => typeof value === 'string' ? '' : null;
 
 const diffRemove = (prev: VPropertiesDict): ?VPropertiesDict => {
-    let diff: ?VPropertiesDict;
+    let diff;
 
     for (let key in prev) {
         diff = diff || {};
@@ -19,7 +19,7 @@ const diffRemove = (prev: VPropertiesDict): ?VPropertiesDict => {
 };
 
 const diffUpdate = (prev: VPropertiesDict, next: VPropertiesDict): ?VPropertiesDict => {
-    let diff: ?VPropertiesDict;
+    let diff;
 
     for (let key in prev) {
         if (key in next) {
@@ -38,12 +38,10 @@ const diffUpdate = (prev: VPropertiesDict, next: VPropertiesDict): ?VPropertiesD
     return diff;
 };
 
-const diffCreate = (acc: ?VPropertiesDict, prev: VPropertiesDict, next: VPropertiesDict): ?VPropertiesDict => {
+const diffCreate = (acc: ?VPropertiesDict, next: VPropertiesDict): ?VPropertiesDict => {
     for (let key in next) {
-        if (!(key in prev)) {
-            acc = acc || {};
-            acc[ key ] = next[ key ];
-        }
+        acc = acc || {};
+        acc[ key ] = next[ key ];
     }
 
     return acc;
@@ -56,7 +54,6 @@ export const diff = (prev: VPropertiesDict, next: ?VPropertiesDict): ?VPropertie
 
     return diffCreate(
         diffUpdate(prev, next),
-        prev,
         next
     );
 };

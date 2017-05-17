@@ -5,7 +5,7 @@ import {
 } from '../../v-dom/v-facts/v-attribute';
 
 const diffRemove = (prev: VAttributesDict): ?VAttributesDict => {
-    let diff: ?VAttributesDict;
+    let diff;
 
     for (let key in prev) {
         diff = diff || {};
@@ -16,7 +16,7 @@ const diffRemove = (prev: VAttributesDict): ?VAttributesDict => {
 };
 
 const diffUpdate = (prev: VAttributesDict, next: VAttributesDict): ?VAttributesDict => {
-    let diff: ?VAttributesDict;
+    let diff;
 
     for (let key in prev) {
         if (key in next) {
@@ -35,7 +35,7 @@ const diffUpdate = (prev: VAttributesDict, next: VAttributesDict): ?VAttributesD
     return diff;
 };
 
-const diffCreate = (acc: ?VAttributesDict, prev: VAttributesDict, next: VAttributesDict): ?VAttributesDict => {
+const diffCreate = (acc: ?VAttributesDict, next: VAttributesDict): ?VAttributesDict => {
     for (let key in next) {
         acc = acc || {};
         acc[ key ] = next[ key ];
@@ -51,7 +51,6 @@ export const diff = (prev: VAttributesDict, next: ?VAttributesDict): ?VAttribute
 
     return diffCreate(
         diffUpdate(prev, next),
-        prev,
         next
     );
 };
