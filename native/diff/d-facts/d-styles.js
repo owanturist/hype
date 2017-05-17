@@ -41,7 +41,7 @@ const diffCreate = (acc: ?VStylesDict, next: VStylesDict): ?VStylesDict => {
     return acc;
 };
 
-const diff = (prev: VStylesDict, next: ?VStylesDict): ?VStylesDict => {
+export const diff = (prev: VStylesDict, next: ?VStylesDict): ?VStylesDict => {
     if (!next) {
         return diffRemove(prev);
     }
