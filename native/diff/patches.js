@@ -53,13 +53,13 @@ export const text = (index: number, value: string): Text => ({
 });
 
 export interface Facts<Msg> {
-    type: 'P_TEXT';
+    type: 'P_FACTS';
     index: number;
     diff: VFactsDict<Msg>;
 }
 
 export const facts = <Msg>(index: number, diff: VFactsDict<Msg>): Facts<Msg> => ({
-    type: 'P_TEXT',
+    type: 'P_FACTS',
     index,
     diff
 });
